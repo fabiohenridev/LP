@@ -14,7 +14,7 @@ p{
     height: 400px;
 }
 .Button button{
-    color: white;
+    color: rgb(0, 0, 0);
     background-color: greenyellow;
     padding: 14px 16px;
     width: 200px;
