@@ -1,0 +1,49 @@
+.Head h1{
+font-family: sans-serif;
+text-align: center;
+font-size: 25px;
+padding: 20px;
+color: white;
+}
+
+.Head{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.Head p{
+    color: rgb(180, 180, 180);
+    text-align: center;
+}
+
+.img{
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+}
+
+.img img{
+    max-width: 100%;
+    
+}
+.texto{
+    text-align: center;
+    margin: 20px;
+}
+
+.texto2{
+    margin: 30px;
+}
+.texto3{
+    margin: 30px;
+    text-align:start;
+}
+
+.texto3 h2{
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+}
+

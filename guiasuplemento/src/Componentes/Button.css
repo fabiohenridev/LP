@@ -1,0 +1,30 @@
+h2{
+    color: white;
+}
+p{
+    color: rgb(189, 189, 189);
+    margin: 20px;
+}
+
+.Button{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    height: 400px;
+}
+.Button button{
+    color: white;
+    background-color: greenyellow;
+    padding: 14px 16px;
+    width: 200px;
+    border-radius: 10px;
+    border: none;
+    
+}
+
+.Botao{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
