@@ -2,7 +2,7 @@ h2{
     color: white;
 }
 p{
-    color: rgb(189, 189, 189);
+    color: rgb(226, 226, 226);
     margin: 20px;
 }
 
@@ -11,7 +11,7 @@ p{
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    height: 400px;
+    height: 300px;
 }
 .Button button{
     color: rgb(0, 0, 0);
@@ -20,6 +20,7 @@ p{
     width: 200px;
     border-radius: 10px;
     border: none;
+    box-shadow: white;
     
 }
 
