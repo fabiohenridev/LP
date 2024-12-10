@@ -5,6 +5,7 @@ export default function Button(){
         <div>
          <div className='Button'>
             <h2>Garanta já o seu!</h2>
+            <h3>APENAS $1,99</h3>
             <p>Não perca tempo! Invista na sua saúde e transforme seus resultados hoje mesmo. Clique no botão abaixo e adquira o Guia Prático de Suplementação agora.</p>
             <div className='Botao'>
             <button onClick={()=>ConnectGetway()}>COMPRAR AGORA</button>
