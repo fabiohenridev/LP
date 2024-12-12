@@ -1,7 +1,9 @@
 .Head h1{
 font-family:monospace;
 text-align: center;
-font-size: 25px;
+font-size: 20px;
+position: relative;
+top: 50px;
 padding: 20px;
 color: white;
 }
@@ -17,6 +19,8 @@ color: white;
     text-align: center;
     font-family: monospace;
     font-size: 15px;
+    position: relative;
+    top: 40px;
 }
 
 .img{
