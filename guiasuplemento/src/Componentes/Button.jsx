@@ -18,6 +18,6 @@ export default function Button(){
     )
 
     function ConnectGetway(){
-        window.location.href="https://techouseofc.pay.yampi.com.br/r/MRYBDDHPFP"
+        window.location.href="https://techouseofc.pay.yampi.com.br/r/9ICECVUDD3"
     }
 }
