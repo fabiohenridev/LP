@@ -1,5 +1,5 @@
 .Head h1{
-font-family: sans-serif;
+font-family:monospace;
 text-align: center;
 font-size: 25px;
 padding: 20px;
@@ -15,6 +15,8 @@ color: white;
 .Head p{
     color: rgb(180, 180, 180);
     text-align: center;
+    font-family: monospace;
+    font-size: 15px;
 }
 
 .img{
