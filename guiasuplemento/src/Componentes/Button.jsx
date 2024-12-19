@@ -6,9 +6,9 @@ export default function Button(){
             
          <div className='Button'>
             <h2>Garanta já o seu!</h2>
-            <h3>APENAS $9,90</h3>
+            <h3>APENAS $4,99</h3>
             <p>Adquira o Seu eBook Agora e Comece a Mudar Sua Vida Financeira!
-            Por apenas R$9,90, você terá acesso ao passo a passo das três melhores formas de ganhar dinheiro na internet.</p>
+            Por apenas R$4,99, você terá acesso ao passo a passo das três melhores formas de ganhar dinheiro na internet.</p>
          
             <div className='Botao'>
                 <button target="blank_" onClick={()=>ConnectGetway()}>COMPRAR AGORA</button>
