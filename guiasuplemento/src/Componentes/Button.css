@@ -56,17 +56,10 @@ h3 {
     font-family: "Poppins", serif;
 }
 
-.pulsante{
-    padding: 20px;
-    position: absolute;
-    top: 2300px;
-    left: 0;
-    right: 0;
-    
-}
 
-#pulsante{
-    transition: 1.5s;
+.pulsante{
+   
+  padding: 0;
 }
 
 .textBottom{

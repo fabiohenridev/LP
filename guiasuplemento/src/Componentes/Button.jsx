@@ -31,9 +31,7 @@ setTimeout(pulsante, 500);
             <div className='Button'>
                 <h2>Garanta já o seu!</h2>
                 <h3 className='Promo'>De $29,90 por</h3>
-                <div className='pulsante'>
                 <h3 id='pulsante'>APENAS $4,99</h3>
-                </div>
                 <p className='textBottom'>Adquira o Seu eBook Agora e Comece a Mudar Sua Vida Financeira!
                     Por apenas R$4,99, você terá acesso ao passo a passo das três melhores formas de ganhar dinheiro na internet.</p>
 
