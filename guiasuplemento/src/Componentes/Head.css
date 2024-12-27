@@ -11,6 +11,10 @@ padding: 20px;
 color: white;
 }
 
+.Internet{
+    color: #E00042;
+}
+
 .Head{
     border: 1px solid black;
     display: flex;

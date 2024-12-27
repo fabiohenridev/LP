@@ -4,7 +4,7 @@ export default function Head() {
     return (
         <div>
             <div className='Head'>
-                <h1>AS TRÊS MELHORES FORMAS DE GANHAR DINHEIRO NA INTERNET</h1>
+                <h1>AS TRÊS MELHORES FORMAS DE <span className='Internet'>GANHAR DINHEIRO NA INTERNET</span></h1>
                 <p>GARANTA JÁ O SEU !</p>
                 <div className='img'>
                     <img src="/MonneyOn.png" alt=''></img>
