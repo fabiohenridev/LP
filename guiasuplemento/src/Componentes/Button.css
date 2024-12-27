@@ -5,6 +5,7 @@ h2 {
 p {
     color: rgb(136, 136, 136);
     margin: 20px;
+    font-family: "Poppins", serif;
 }
 
 .Button {
@@ -12,7 +13,9 @@ p {
     flex-direction: column;
     justify-content: center;
     text-align: center;
-    height: 500px;
+    height: 400px;
+    background-color: rgb(23, 23, 23);
+    margin-top: 30px;
 }
 
 .Button button {
@@ -38,6 +41,6 @@ p {
 }
 
 h3 {
-    color:#DF0041;
+    color: #3fdf00;
     padding: 5px;
 }

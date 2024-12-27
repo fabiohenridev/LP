@@ -13,18 +13,18 @@ export default function Head() {
                     <p>Quer saber como gerar uma renda extra ou até mesmo transformar sua vida financeira trabalhando online? Este eBook é a chave para começar a ganhar dinheiro pela internet de maneira prática, sem precisar sair de casa!</p>
                 </div>
                 <h2>Por que este eBook é perfeito para você?</h2>
-                <p>Fácil de Seguir: Métodos claros, diretos e fáceis de aplicar.<br/><br/>
-                    Sem Complicação: Não precisa de habilidades técnicas avançadas para começar.<br/><br/>
-                    Estratégias Comprovadas: As três formas mais rentáveis e eficazes para começar a ganhar dinheiro agora.<br/><br/>
+                <p>Fácil de Seguir: Métodos claros, diretos e fáceis de aplicar.<br /><br />
+                    Sem Complicação: Não precisa de habilidades técnicas avançadas para começar.<br /><br />
+                    Estratégias Comprovadas: As três formas mais rentáveis e eficazes para começar a ganhar dinheiro agora.<br /><br />
                     Liberdade de Trabalho: Aprenda como montar um fluxo de trabalho online e ganhar no seu tempo.
                 </p>
                 <h2 className='tolearn'>O QUE VOCÊ VAI APRENDER?</h2>
-                <p>As três formas mais rentáveis de ganhar dinheiro online.<br/><br/>
-Como começar em cada uma das formas com pouco ou nenhum investimento inicial.<br/><br/>
-Ferramentas essenciais para ter sucesso em cada método.<br/><br/>
-Dicas práticas e truques para maximizar os seus ganhos rapidamente.<br/><br/>
-</p>
-<img className='Decolar' src='/Decolar.png'></img>
+                <p>As três formas mais rentáveis de ganhar dinheiro online.<br /><br />
+                    Como começar em cada uma das formas com pouco ou nenhum investimento inicial.<br /><br />
+                    Ferramentas essenciais para ter sucesso em cada método.<br /><br />
+                    Dicas práticas e truques para maximizar os seus ganhos rapidamente.<br /><br />
+                </p>
+                <img className='Decolar' src='/Decolar.png'></img>
 
             </div>
         </div>
