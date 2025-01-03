@@ -29,7 +29,7 @@ export default function Head() {
 
     return (
         <div>
-
+            <div className='DivEyeEye'>  
             <div className='DivEye'>
 
                 <i
@@ -37,8 +37,9 @@ export default function Head() {
                     className='bi bi-eye-fill Eye'
                     style={{ color: corOlho }}
                 ></i>
-                <p>{view} pessoas finalizando compra...</p>
+                <p>{view} Pessoas finalizando compra...</p>
 
+            </div>
             </div>
             <div className='Head'>
 
