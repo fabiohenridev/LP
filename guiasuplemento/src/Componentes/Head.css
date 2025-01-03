@@ -27,11 +27,12 @@ color: white;
     display: flex;
  background-color: rgb(23, 23, 23);
  align-items: center;
+ justify-content: center;
 }
 
 .DivEye p{
    
-    font-size: 8px;
+    font-size: 10px;
     color: white;
    position: relative;
    right: 20px;
