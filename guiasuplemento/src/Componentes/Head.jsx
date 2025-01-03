@@ -51,7 +51,7 @@ export default function Head() {
                     AS TRÊS MELHORES FORMAS DE{' '}
                     <span className='Internet'>GANHAR DINHEIRO NA INTERNET</span>
                 </h1>
-                <p>GARANTA JÁ O SEU !</p>
+              
                 <div className='img'>
                     <img src='/PhotoAtt.jpg' alt='' />
                 </div>
