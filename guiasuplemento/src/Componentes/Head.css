@@ -16,6 +16,29 @@ color: white;
     font-size: 20px;
 }
 
+.Eye{
+    color: rgb(255, 255, 255);
+    margin: 5px;
+    font-size: 12px;
+   
+}
+
+.DivEye{
+    display: flex;
+ background-color: rgb(23, 23, 23);
+ align-items: center;
+}
+
+.DivEye p{
+   
+    font-size: 8px;
+    color: white;
+   position: relative;
+   right: 20px;
+}
+
+
+
 .Head{
     border: 1px solid black;
     display: flex;
