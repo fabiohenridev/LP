@@ -35,6 +35,7 @@ color: white;
     background-color:  rgb(23, 23, 23);
     display: flex;
     justify-content: center;
+    border-bottom:1px solid rgba(255, 255, 255, 0.433) ;
 }
 
 .DivEye p{
@@ -42,7 +43,7 @@ color: white;
     padding: 5px;
     font-size: 12px;
     border-radius: 5px;
-    padding-left: 5px;
+   
 }
 
 
