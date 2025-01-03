@@ -32,12 +32,12 @@ export default function Head() {
             <div className='DivEyeEye'>  
             <div className='DivEye'>
 
-                <i
+             
+                <p><i
                     id='Eye'
                     className='bi bi-eye-fill Eye'
                     style={{ color: corOlho }}
-                ></i>
-                <p>{view} Pessoas finalizando compra...</p>
+                ></i>{view} Pessoas finalizando compra...</p>
 
             </div>
             </div>
