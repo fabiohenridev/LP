@@ -5,12 +5,13 @@ export default function Head() {
     const [corOlho, setCorOlho] = useState('Red'); // Estado para controlar a cor
     const [view, setView] = useState(5);
 
+useState(()=>{
 
-    setTimeout(() => {
+const interval = setTimeout(()=>{
 
-        setView(3);
+setView(3)
 
-    }, 4000)
+},7000)}, [])
 
 
     // Alterna a cor a cada 2 segundos
