@@ -5,11 +5,11 @@ h2 {
     color: rgb(255, 255, 255);
 }
 
-.GarantaJa{
+.GarantaJa {
     color: gray;
 }
 
-.Apenas499{
+.Apenas499 {
     color: white;
 }
 
@@ -29,7 +29,7 @@ p {
     margin-top: 30px;
 }
 
-.Promo{
+.Promo {
     color: rgba(255, 0, 0, 0.562);
     font-size: 15px;
     position: relative;
@@ -58,8 +58,13 @@ p {
     background: none;
 }
 
-.Apenas{
-    height: 50px;
+.Apenas {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 h3 {
@@ -67,4 +72,3 @@ h3 {
     padding: 5px;
     font-family: "Poppins", serif;
 }
-
