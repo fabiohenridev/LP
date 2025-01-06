@@ -6,8 +6,12 @@ import { use } from 'react';
 export default function Button() {
 
     const [Font, setFont] = useState('20px');
+  
 
-    useState(() => {
+
+    //altera o tamanho do valor '4,99'
+
+    useEffect(() => {
 
         const interval = setInterval(() => {
 
@@ -21,7 +25,7 @@ export default function Button() {
 
         return () => clearInterval(interval)
 
-    })
+    }, [])
 
     return (
         <div>
@@ -36,7 +40,7 @@ export default function Button() {
                     Por apenas R$4,99, você terá acesso ao passo a passo das três melhores formas de ganhar dinheiro na internet.</p>
 
                 <div className='Botao'>
-                    <button target="blank_" onClick={() => ConnectGetway()}>COMPRAR AGORA</button>
+                    <button  target="blank_" onClick={() => ConnectGetway()}>COMPRAR AGORA</button>
                 </div>
             </div>
         </div>

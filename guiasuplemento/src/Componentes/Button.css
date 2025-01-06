@@ -37,8 +37,8 @@ p {
 }
 
 .Button button {
-    color: rgb(255, 255, 255);
-    background-color: #DF0041;
+    color: rgb(0, 0, 0);
+    background-color: #ffffff;
     padding: 14px 16px;
     width: 200px;
     border-radius: 10px;
