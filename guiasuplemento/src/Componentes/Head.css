@@ -1,61 +1,61 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 
-.Head h1{
+.Head h1 {
     font-family: "Poppins", serif;
-text-align: center;
-font-size: 17px;
-position: relative;
-top: 50px;
-padding: 20px;
-color: white;
+    text-align: center;
+    font-size: 17px;
+    position: relative;
+    top: 50px;
+    padding: 20px;
+    color: white;
 }
 
-.Internet{
+.Internet {
     color: #E00042;
     font-size: 20px;
 }
 
-.Eye{
+.Eye {
     color: rgb(255, 255, 255);
     margin: 10px;
     font-size: 15px;
-   
+
 }
 
-.DivEye{
+.DivEye {
     display: flex;
- background-color: rgb(23, 23, 23);
- align-items: center;
- justify-content: center;
- 
+    background-color: rgb(23, 23, 23);
+    align-items: center;
+    justify-content: center;
+
 }
 
-.DivEyeEye{
-    background-color:  rgb(23, 23, 23);
+.DivEyeEye {
+    background-color: rgb(23, 23, 23);
     display: flex;
     justify-content: center;
-    border-bottom:1px solid rgba(255, 255, 255, 0.433) ;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.433);
 }
 
-.DivEye p{
+.DivEye p {
     background-color: rgba(62, 62, 62, 0.355);
     padding: 5px;
     font-size: 12px;
     border-radius: 5px;
-   
 }
 
 
 
-.Head{
+.Head {
     border: 1px solid black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: rgb(23, 23, 23);
 }
-.Head p{
+
+.Head p {
     color: rgb(180, 180, 180);
     text-align: center;
     font-family: "Poppins", serif;
@@ -64,47 +64,50 @@ color: white;
     top: 40px;
 }
 
-.img{
+.img {
     display: flex;
     justify-content: center;
     margin-top: 70px;
 }
 
-.img img{
+.img img {
     max-width: 100%;
-    
+
 }
-.texto{
+
+.texto {
     text-align: center;
     margin: 20px;
 }
 
-.texto2{
+.texto2 {
     margin: 30px;
-}
-.texto3{
-    margin: 30px;
-    text-align:start;
 }
 
-.texto3 h2{
+.texto3 {
+    margin: 30px;
+    text-align: start;
+}
+
+.texto3 h2 {
     color: white;
     padding: 10px;
     text-align: center;
     font-size: 20px;
 }
-h2{
+
+h2 {
     text-align: center;
     margin: 20px;
     font-size: 20px;
 }
+
 .tolearn {
     font-size: 20px;
     padding: 20px;
 }
-.Decolar{
+
+.Decolar {
     position: relative;
     top: 70px;
 }
-
-

@@ -6,15 +6,11 @@ export default function Head() {
     const [view, setView] = useState(5);
 
 
-   setTimeout(()=>{
+    setTimeout(() => {
 
-     setView(3);
-    
-   },4000)
+        setView(3);
 
-
-  
-   
+    }, 4000)
 
 
     // Alterna a cor a cada 2 segundos
@@ -29,17 +25,17 @@ export default function Head() {
 
     return (
         <div>
-            <div className='DivEyeEye'>  
-            <div className='DivEye'>
+            <div className='DivEyeEye'>
+                <div className='DivEye'>
 
-             
-                <p><i
-                    id='Eye'
-                    className='bi bi-eye-fill Eye'
-                    style={{ color: corOlho }}
-                ></i>{view} Pessoas finalizando compra...</p>
 
-            </div>
+                    <p><i
+                        id='Eye'
+                        className='bi bi-eye-fill Eye'
+                        style={{ color: corOlho }}
+                    ></i>{view} Pessoas finalizando compra...</p>
+
+                </div>
             </div>
             <div className='Head'>
 
@@ -51,9 +47,9 @@ export default function Head() {
                     AS TRÊS MELHORES FORMAS DE{' '}
                     <span className='Internet'>GANHAR DINHEIRO NA INTERNET</span>
                 </h1>
-              
+
                 <div className='img'>
-                    <img src='/PhotoAtt.jpg' alt='' />
+                    <img src='/MonneyOn.jpg' alt='' />
                 </div>
                 <div className='texto'>
                     <p>
