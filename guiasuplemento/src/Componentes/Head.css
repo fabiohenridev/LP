@@ -16,6 +16,24 @@
     font-size: 20px;
 }
 
+.Videoo{
+    
+    display: block;
+    height: auto;
+    
+}
+
+video{
+    border-radius: 5px;
+}
+
+.Video{
+ width: 100%;
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
 .Eye {
     color: rgb(255, 255, 255);
     margin: 10px;

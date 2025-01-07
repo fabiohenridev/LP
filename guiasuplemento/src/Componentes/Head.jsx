@@ -60,6 +60,15 @@ setView(3)
                     </p>
                 </div>
                 <h2>Por que este eBook é perfeito para você?</h2>
+                <div className='Video'>
+                     
+                     <video  width={300} loop autoPlay muted>
+
+                         <source className='Videoo' src='/videoAnimated.mp4'></source>
+
+                     </video>
+
+                </div>
                 <p>
                     Fácil de Seguir: Métodos claros, diretos e fáceis de aplicar.<br />
                     <br />
