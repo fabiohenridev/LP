@@ -3,7 +3,7 @@
 
 
 .BoxF1 {
-    height: 200px;
+    height: 300px;
     background-color: rgb(23, 23, 23);
     display: flex;
     justify-content: center;
@@ -13,14 +13,17 @@
 
 }
 
+
 .BoxF2 {
 
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     flex-direction: column;
     padding: 5px;
+    background-color: rgb(23, 23, 23); ;
 }
 
 h4 {
@@ -31,4 +34,16 @@ h4 {
 
 .BoxF2 img{
     width: 250px;
+}
+
+.Sobre{
+    
+ color: gray;
+ padding: 10px;
+}
+
+.TextSobre p{
+
+font-size: 8px;
+text-align: center;
 }
