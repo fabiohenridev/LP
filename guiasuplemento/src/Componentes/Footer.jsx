@@ -15,7 +15,7 @@ setMenuAberto(!menuAberto);
 }
 
 const Whatsapp = () =>{
-    window.location.href="https://wa.me/5584991562754?text=Ol%C3%A1,%20somos%20da%20techouse%20!%20Iremos%20te%20responder%20o%20quanto%20antes%20;)";
+    window.location.href="https://wa.me/5584991562754?text=Ol%C3%A1,%20Gostaria%20de%20saber%20mais%20sobre%20o%20e-book...";
 }
 
 const AbrirPrivacidade = () =>{
