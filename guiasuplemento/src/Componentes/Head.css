@@ -16,22 +16,29 @@
     font-size: 20px;
 }
 
-.Videoo{
-    
+.Videoo {
+
     display: block;
     height: auto;
-    
+
 }
 
-video{
+video {
     border-radius: 5px;
 }
 
-.Video{
- width: 100%;
- display: flex;
- justify-content: center;
- align-items: center;
+.MenuIcon {
+    background-color: none;
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.Video {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .Eye {
@@ -52,9 +59,12 @@ video{
 .DivEyeEye {
     background-color: rgb(23, 23, 23);
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.433);
 }
+
+
 
 .DivEye p {
     background-color: rgba(62, 62, 62, 0.355);
@@ -128,4 +138,100 @@ h2 {
 .Decolar {
     position: relative;
     top: 70px;
+}
+
+.Menu {
+    background-color: rgba(56, 56, 56, 0.974);
+    position: fixed;
+    height: 220px;
+    left: 20px;
+    right: 20px;
+    top: 20px;
+    z-index: 1000;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.105);
+}
+
+.whatsappD{
+    border: none;
+    background: none;
+    color: white;
+    padding: 8px;
+    font-size: 20px;
+    background-color:#FF4155;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.whats{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Poppins", serif;
+}
+
+.FaleComAgente{
+    font-size: 10px;
+    margin-left: 5px;
+    font-family: "Poppins", serif;
+    color: #ffffff;
+}
+
+.Menu h5 {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    padding: 3px;
+    font-family: "Poppins", serif;
+}
+
+.DescricaoDuvida{
+    display: flex;
+    align-items: center;
+   
+}
+
+.whatsapp {
+    color: white;
+    font-size: 20px;
+    position: relative;
+    left: 20px;
+}
+
+.MenuDuvida {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.162);
+}
+
+
+
+.Duvida {
+    flex: 60%;
+    margin-left: 20%;
+}
+
+.Close {
+    border: none;
+    background: none;
+    font-family: "Poppins", serif;
+    color: white;
+}
+
+.BotaoDuvida {
+    flex: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Img{
+    width: 40px;
+    padding: 10px;
+}
+
+.ConteudoDuvida p{
+    font-size: 12px;
+    color: white;
+
 }
