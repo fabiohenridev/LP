@@ -50,16 +50,25 @@ video {
 
 .DivEye {
     display: flex;
+    width: 100%;
     background-color: rgb(23, 23, 23);
     align-items: center;
     justify-content: center;
 
 }
 
+.BotaoMenuu{
+    background-color: rgb(23, 23, 23); 
+    flex:20%;
+}
+
+.Pessoas{
+    flex: 80%;
+}
+
 .DivEyeEye {
     background-color: rgb(23, 23, 23);
     display: flex;
-    justify-content: flex-start;
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.433);
 }
@@ -235,3 +244,24 @@ h2 {
     color: white;
 
 }
+
+@media (max-width:304px){
+
+
+.Menu{
+    height: 250px;
+}
+
+}
+
+@media (min-width:373px){
+
+
+    .Menu{
+        height: 200px;
+    }
+    
+    }
+    
+    
+

@@ -9,10 +9,10 @@ export default function Head() {
 
     // função para abrir menu
 
-    
-const Whatsapp = () =>{
-    window.location.href="https://wa.me/5584991562754?text=Ol%C3%A1,%20Gostaria%20de%20saber%20mais%20sobre%20o%20e-book...";
-}
+
+    const Whatsapp = () => {
+        window.location.href = "https://wa.me/5584991562754?text=Ol%C3%A1,%20Gostaria%20de%20saber%20mais%20sobre%20o%20e-book...";
+    }
 
     const AbrirMenu = () => {
         setMenuAberto(!menuAberto);
@@ -60,6 +60,7 @@ const Whatsapp = () =>{
             <div className='DivEyeEye'>
                 <div className='DivEye'>
 
+                    <div className='Pessoas'>
 
                     <p style={{ backgroundColor: corTop, transition: 'background 0.5s ease-in-out' }} ><i
                         id='Eye'
@@ -67,6 +68,9 @@ const Whatsapp = () =>{
                         style={{ color: corOlho }}
                     ></i>{view} Pessoas finalizando compra...</p>
 
+                    </div>
+                    <div className='BotaoMenuu'><i onClick={AbrirMenu} class="bi bi-list whatsapp"></i></div>
+                  
                 </div>
 
                 {menuAberto && (
@@ -93,8 +97,9 @@ const Whatsapp = () =>{
 
 
                 )}
-                <div className='DivMenu'><i onClick={AbrirMenu} class="bi bi-list whatsapp"></i></div>
+
             </div>
+          
             <div className='Head'>
 
 
