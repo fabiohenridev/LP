@@ -4,12 +4,29 @@ import './Head.css';
 export default function Head() {
     const [corOlho, setCorOlho] = useState('Red'); // Estado para controlar a cor
     const [view, setView] = useState(5);
+    const [corTop, setCorTop] = useState(' rgba(62, 62, 62, 0.355)');
+
+    useEffect(()=>{
+
+      const interval = setInterval(()=>{
+
+
+        setCorTop((prevTop)=> (prevTop == 'rgba(62, 62, 62, 0.355)') ? 'rgba(84, 84, 84, 0.35)' : 'rgba(62, 62, 62, 0.355)' )
+
+      }, 500);
+     
+
+      return () => clearInterval(interval);
+
+    }, [])
 
 useState(()=>{
 
 const interval = setTimeout(()=>{
 
 setView(3)
+
+return () => clearInterval(interval);
 
 },7000)}, [])
 
@@ -30,7 +47,7 @@ setView(3)
                 <div className='DivEye'>
 
 
-                    <p><i
+                    <p style={{backgroundColor: corTop, transition: 'background 0.5s ease-in-out'}} ><i
                         id='Eye'
                         className='bi bi-eye-fill Eye'
                         style={{ color: corOlho }}
