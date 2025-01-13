@@ -226,6 +226,8 @@ h2 {
     background: none;
     font-family: "Poppins", serif;
     color: white;
+    border-radius: 50%;
+    font-size: 12px;
 }
 
 .BotaoDuvida {

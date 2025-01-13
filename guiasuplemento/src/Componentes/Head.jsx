@@ -6,6 +6,20 @@ export default function Head() {
     const [view, setView] = useState(5);
     const [corTop, setCorTop] = useState(' rgba(62, 62, 62, 0.355)');
     const [menuAberto, setMenuAberto] = useState(false);
+    const [backgroundX, setBackgroundX] = useState('rgba(0, 0, 0, 0.2)');
+
+    useEffect(()=>{
+
+    const interval = setInterval(()=>{
+
+     setBackgroundX((prevBack)=> prevBack === 'rgba(0, 0, 0, 0.2)' ? 'rgba(255, 255, 255, 0.09)': 'rgba(0, 0, 0, 0.2)');
+
+    },1000)
+
+
+    return () => clearInterval(interval)
+
+    },[])
 
     // função para abrir menu
 
@@ -92,7 +106,7 @@ return () => clearTimeout(Timer);
                         <div className='MenuDuvida'>
                             <h5 className='Duvida'>DÚVIDAS?</h5>
                             <div className='BotaoDuvida'>
-                                <button onClick={AbrirMenu} className='Close'><i class="bi bi-x-lg "></i></button>
+                                <button style={{background: backgroundX, transition: 'background 0.5s ease-in-out' }} onClick={AbrirMenu} className='Close'><i class="bi bi-x-lg "></i></button>
                             </div>
                         </div>
                         <div className='DescricaoDuvida'>
