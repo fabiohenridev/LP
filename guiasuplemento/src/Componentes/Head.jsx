@@ -18,6 +18,18 @@ export default function Head() {
         setMenuAberto(!menuAberto);
     }
 
+useEffect(()=>{
+
+
+const Timer = setTimeout(()=>{
+    AbrirMenu();
+}, 8000);
+
+
+return () => clearTimeout(Timer);
+
+}, [])
+
     useEffect(() => {
 
         const interval = setInterval(() => {
@@ -69,7 +81,7 @@ export default function Head() {
                     ></i>{view} Pessoas finalizando compra...</p>
 
                     </div>
-                    <div className='BotaoMenuu'><i onClick={AbrirMenu} class="bi bi-list whatsapp"></i></div>
+                  
                   
                 </div>
 
@@ -88,7 +100,7 @@ export default function Head() {
                                 <img className='Img' src='./man.png'></img>
                             </div>
                             <div className='ConteudoDuvida'>
-                                <p>Olá, tudo bem!? Me chamo Fabio Lima. Se você tem dúvidas em relação ao E-book, pode entrar em contato com a gente pelo nosso whatsapp.</p>
+                                <p>Olá, tudo bem!? Me chamo Fabio Lima. Se você ainda tiver dúvidas em relação ao E-book, pode entrar em contato com a gente pelo nosso whatsapp.</p>
                             </div>
 
                         </div>

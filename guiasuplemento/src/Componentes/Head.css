@@ -45,7 +45,7 @@ video {
     color: rgb(255, 255, 255);
     margin: 10px;
     font-size: 15px;
-
+    
 }
 
 .DivEye {
@@ -80,6 +80,7 @@ video {
     padding: 5px;
     font-size: 12px;
     border-radius: 5px;
+    text-align: center;
 }
 
 
