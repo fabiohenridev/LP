@@ -104,7 +104,7 @@ return () => clearTimeout(Timer);
 
                     <div className='Menu'>
                         <div className='MenuDuvida'>
-                            <h5 className='Duvida'>DÚVIDAS?</h5>
+                            <h5 className='Duvida'>FALA, EMPREENDEDOR !</h5>
                             <div className='BotaoDuvida'>
                                 <button style={{background: backgroundX, transition: 'background 0.5s ease-in-out' }} onClick={AbrirMenu} className='Close'><i class="bi bi-x-lg "></i></button>
                             </div>
@@ -114,11 +114,11 @@ return () => clearTimeout(Timer);
                                 <img className='Img' src='./man.png'></img>
                             </div>
                             <div className='ConteudoDuvida'>
-                                <p>Olá, tudo bem!? Me chamo Fabio Lima. Se você ainda tiver dúvidas em relação ao E-book, pode entrar em contato com a gente pelo nosso whatsapp.</p>
+                                <p>Olá, me chamo <span className='FabioL'>Fabio lima</span>... que bom ter você por aqui decidindo saber mais sobre o marketing digital ! </p>
                             </div>
 
                         </div>
-                        <button onClick={Whatsapp} className='whatsappD'><i class="bi bi-whatsapp whats"><span className='FaleComAgente'>IR PARA WHATSAPP</span></i></button>
+                       
                     </div>
 
 

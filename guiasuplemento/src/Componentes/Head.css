@@ -153,13 +153,17 @@ h2 {
 .Menu {
     background-color: rgba(56, 56, 56, 0.974);
     position: fixed;
-    height: 220px;
+    height: 140px;
     left: 20px;
     right: 20px;
     top: 20px;
     z-index: 1000;
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.105);
+}
+
+.FabioL{
+    font-weight: 700;
 }
 
 .whatsappD{
@@ -274,11 +278,11 @@ h2 {
     margin: 0;
 }
 
-@media (max-width:304px){
+@media (max-width:306px){
 
 
 .Menu{
-    height: 250px;
+    height: 180px;
 }
 
 }
@@ -287,7 +291,7 @@ h2 {
 
 
     .Menu{
-        height: 200px;
+        height: 130px;
     }
     
     }
