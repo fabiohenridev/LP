@@ -36,11 +36,11 @@ const getOnlineUsers = (setOnlineUsers, database) => {
   onValue(usersRef, (snapshot) => {
     const users = snapshot.val();
     if (users) {
-      // Filtra e conta apenas os usuários online que têm `lastSeen` recente (menos de 30 segundos atrás)
+      // Filtra e conta apenas os usuários online que têm `lastSeen` recente (menos de 5 minutos atrás)
       const onlineUsers = Object.keys(users).filter(userId => {
         const user = users[userId];
-        // Considera apenas usuários com status online e com o `lastSeen` atualizado nos últimos 30 segundos
-        return user.isOnline && (Date.now() - user.lastSeen < 30 * 1000);  // Considera online se a última atividade foi nos últimos 30 segundos
+        // Considera apenas usuários com status online e com o `lastSeen` atualizado nos últimos 5 minutos
+        return user.isOnline && (Date.now() - user.lastSeen < 5 * 60 * 1000);  // Considera online se a última atividade foi nos últimos 5 minutos
       }).length;
 
       setOnlineUsers(onlineUsers);  // Atualiza o estado com a quantidade de online
@@ -115,9 +115,7 @@ export default function Footer() {
   const SenhaMen = () => {
     if (senha === '5tlmjt0f2c') {
       alert('ok');
-      setSenha('');
       OpenDivSenha();
-     
     } else {
       alert('somente pessoas cadastradas');
     }
