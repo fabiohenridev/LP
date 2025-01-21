@@ -115,7 +115,9 @@ export default function Footer() {
   const SenhaMen = () => {
     if (senha === '5tlmjt0f2c') {
       alert('ok');
+      setSenha('');
       OpenDivSenha();
+     
     } else {
       alert('somente pessoas cadastradas');
     }
