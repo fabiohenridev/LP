@@ -1,8 +1,62 @@
 import { useState, useEffect } from 'react';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, set, onValue, remove, update } from 'firebase/database';
+import { getAnalytics } from 'firebase/analytics';
 import './Footer.css';
 
-export default function Footer() {
+// Função para registrar um usuário online
+const registerUser = (userId, database) => {
+  const userRef = ref(database, 'onlineUsers/' + userId);
 
+  // Registrar o usuário como online com o timestamp (para poder determinar a última vez que ele foi ativo)
+  set(userRef, {
+    isOnline: true,
+    lastSeen: Date.now()  // Marca o horário da última interação
+  });
+
+  // Ação para marcar como offline quando o usuário sair
+  const handleBeforeUnload = () => {
+    update(userRef, {
+      isOnline: false,
+      lastSeen: Date.now()  // Atualiza a hora do último visto ao desconectar
+    });
+  };
+
+  window.addEventListener('beforeunload', handleBeforeUnload);
+
+  // Limpeza ao desmontar o componente (remover o evento)
+  return () => {
+    window.removeEventListener('beforeunload', handleBeforeUnload);
+  };
+};
+
+// Função para remover um usuário online
+const removeUser = (userId, database) => {
+  const userRef = ref(database, 'onlineUsers/' + userId);
+  remove(userRef);  // Remove o usuário da lista quando ele desconectar
+};
+
+// Função para verificar e contar o número de usuários online (baseado no timestamp)
+const getOnlineUsers = (setOnlineUsers, database) => {
+  const usersRef = ref(database, 'onlineUsers');
+  onValue(usersRef, (snapshot) => {
+    const users = snapshot.val();
+    if (users) {
+      // Filtra e conta apenas os usuários online que tem `lastSeen` atualizado nos últimos 5 minutos
+      const onlineUsers = Object.keys(users).filter(userId => {
+        const user = users[userId];
+        // Considera apenas usuários com status online e com o `lastSeen` recente (menos de 5 minutos atrás)
+        return user.isOnline && (Date.now() - user.lastSeen < 5 * 60 * 1000);  // Considera online se a última atividade foi nos últimos 5 minutos
+      }).length;
+
+      setOnlineUsers(onlineUsers);  // Atualiza o estado com a quantidade de online
+    } else {
+      setOnlineUsers(0);  // Caso não haja nenhum usuário online
+    }
+  });
+};
+
+export default function Footer() {
   const [menuAberto, setMenuAberto] = useState(false);
   const [privacidade, setPrivacidade] = useState(false);
   const [largura, setLargura] = useState(0);
@@ -10,191 +64,127 @@ export default function Footer() {
   const [senha, setSenha] = useState('');
   const [divSenha, setDivSenha] = useState(false);
   const [onlineUsers, setOnlineUsers] = useState(0);
-  const [corOlho, setCorOlho] = useState(' rgb(0, 255, 60)');
+  const [corOlho, setCorOlho] = useState('rgb(0, 255, 60)');
 
-  useEffect(()=>{
-
-     const interval = setInterval(()=>{
-
-       setCorOlho((prevCor)=>prevCor ===' rgb(0, 255, 60)'? 'white': ' rgb(0, 255, 60)');
-
-     }, 500)
-
-     return () => clearInterval(interval);
-
-
-  }, [])
-  
   useEffect(() => {
-    // Função que simula a contagem de usuários online
-    const updateOnlineStatus = () => {
-      const currentUsers = parseInt(localStorage.getItem('onlineUsers') || '0');
-      setOnlineUsers(currentUsers);
+    // Configuração do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyCIRvIecgxWjdpQ-So34HMQd43p9hodLzQ",
+      authDomain: "henriquelima-e3e88.firebaseapp.com",
+      projectId: "henriquelima-e3e88",
+      storageBucket: "henriquelima-e3e88.firebasestorage.app",
+      messagingSenderId: "473781875946",
+      appId: "1:473781875946:web:1dea7875cf570f13761393",
+      measurementId: "G-F02G7EDC98",
+      databaseURL: "https://henriquelima-e3e88-default-rtdb.firebaseio.com/"
     };
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    const analytics = getAnalytics(app);
 
-    // Aumenta a quantidade de usuários online ao acessar a página
-    const addUser = () => {
-      let currentUsers = parseInt(localStorage.getItem('onlineUsers') || '0');
-      localStorage.setItem('onlineUsers', currentUsers + 1);
-      updateOnlineStatus();
-    };
+    // Gerar um ID único para cada usuário (usando o timestamp)
+    const userId = Date.now(); // Gerando um ID único com o timestamp
 
-    // Remove o usuário da contagem quando a aba é fechada ou o usuário sai
-    const removeUser = () => {
-      let currentUsers = parseInt(localStorage.getItem('onlineUsers') || '0');
-      localStorage.setItem('onlineUsers', currentUsers - 1);
-      updateOnlineStatus();
-    };
+    // Registrar o usuário no Firebase
+    const cleanup = registerUser(userId, database);
 
-    window.addEventListener('beforeunload', removeUser);  // Quando o usuário fecha a aba ou navega
-    addUser();  // Quando o usuário entra na página
+    // Obter o número de usuários online
+    getOnlineUsers(setOnlineUsers, database);
 
-    updateOnlineStatus();  // Atualiza o contador
-
+    // Limpar ao sair (quando o usuário fecha a aba ou sai da página)
     return () => {
-      removeUser();  // Remove o usuário ao sair
-      window.removeEventListener('beforeunload', removeUser); // Limpa o event listener
+      cleanup();  // Limpeza do evento 'beforeunload' quando o componente for desmontado
+      removeUser(userId, database);
     };
   }, []);
 
-  const OpenDivSenha = () =>{
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCorOlho((prevCor) => (prevCor === 'rgb(0, 255, 60)' ? 'white' : 'rgb(0, 255, 60)'));
+    }, 500);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const OpenDivSenha = () => {
     setDivSenha(true);
-  }
+  };
 
   const OpenAdm = () => {
     setAdm(true);
-  }
+  };
 
-  
   const CloseAdm = () => {
     setAdm(false);
     setDivSenha(false);
-  }
+  };
 
-  
-
-const SenhaMen = () =>{
-  if(senha=='5tlmjt0f2c'){
-    alert('ok');
-    OpenDivSenha();
-  }else{
-    alert('somente pessoas cadastradas')
-  }
-}
-
+  const SenhaMen = () => {
+    if (senha === '5tlmjt0f2c') {
+      alert('ok');
+      OpenDivSenha();
+    } else {
+      alert('somente pessoas cadastradas');
+    }
+  };
 
   const AbrirMenu = () => {
-
     setMenuAberto(!menuAberto);
-
-  }
+  };
 
   const Whatsapp = () => {
-    window.location.href = "https://wa.me/5584991562754?text=Ol%C3%A1,%20Gostaria%20de%20saber%20mais%20sobre%20o%20e-book...";
-  }
+    window.location.href = 'https://wa.me/5584991562754?text=Ol%C3%A1,%20Gostaria%20de%20saber%20mais%20sobre%20o%20e-book...';
+  };
 
   const AbrirPrivacidade = () => {
-
     setPrivacidade(!privacidade);
     setLargura(500);
     if (privacidade) {
-      setLargura(0)
+      setLargura(0);
     }
-
-  }
+  };
 
   return (
     <div className="BoxF1">
       <div style={{ marginTop: largura }} className="BoxF2">
         <h4>TODOS OS DIREITOS RESERVADOS</h4>
-        <h4 className='Sobre' onClick={AbrirMenu}>SOBRE NÓS</h4>
+        <h4 className="Sobre" onClick={AbrirMenu}>SOBRE NÓS</h4>
         {menuAberto && (
-
-          <div className='TextSobre'>
-            <p>Bem-vindo à nossa loja de eBooks! Há três anos, estamos no mercado oferecendo uma experiência de leitura digital de alta qualidade para nossos clientes. Com um compromisso constante com a excelência, nossa missão é fornecer eBooks diversificados e enriquecedores que atendam aos mais variados interesses e necessidades.
-
-              Trabalhamos com dedicação para garantir que nossos produtos sejam cuidadosamente selecionados e apresentados, oferecendo materiais educativos, de entretenimento e desenvolvimento pessoal, sempre com um atendimento que prioriza a satisfação do cliente.
-
-              Nosso objetivo é facilitar o acesso ao conhecimento e à diversão de forma prática, rápida e segura, permitindo que você aproveite ao máximo suas leituras. Agradecemos por nos escolher e esperamos que cada leitura seja uma jornada inesquecível!</p>
+          <div className="TextSobre">
+            <p>Bem-vindo à nossa loja de eBooks! Há três anos, estamos no mercado oferecendo uma experiência de leitura digital de alta qualidade para nossos clientes. Com um compromisso constante com a excelência, nossa missão é fornecer eBooks diversificados e enriquecedores que atendam aos mais variados interesses e necessidades.</p>
           </div>
-
         )}
-        <h4 onClick={AbrirPrivacidade} className='Sobre'>POLÍTICAS DE PRIVACIDADE</h4>
+        <h4 onClick={AbrirPrivacidade} className="Sobre">POLÍTICAS DE PRIVACIDADE</h4>
         {privacidade && (
-
-          <div className='TextSobre'>
-            <p>Nós, da TecHouse, respeitamos sua privacidade e estamos comprometidos em proteger os dados pessoais que você nos confia. Esta política explica como coletamos, usamos e protegemos suas informações.
-
-              1. Coleta de Dados
-              Coletamos as informações necessárias para fornecer nossos serviços, como:
-
-              Dados pessoais: Nome, e-mail, endereço de entrega, telefone.
-              Dados de pagamento: Informações do cartão ou detalhes bancários para transações seguras.
-              Informações de navegação: Cookies e dados de acesso para melhorar sua experiência no site.
-              2. Uso das Informações
-              Utilizamos os dados para:
-
-              Processar compras e garantir entregas.
-              Enviar atualizações sobre pedidos, promoções ou novidades, com seu consentimento.
-              Melhorar nossos serviços e personalizar sua experiência.
-              Cumprir obrigações legais e regulatórias.
-              3. Compartilhamento de Dados
-              Não vendemos nem compartilhamos suas informações pessoais com terceiros, exceto:
-
-              Provedores de pagamento e entrega, para completar transações.
-              Autoridades legais, em caso de cumprimento de ordens judiciais.
-              4. Segurança dos Dados
-              Adotamos medidas técnicas e organizacionais para proteger suas informações, incluindo:
-
-              Criptografia de dados.
-              Controle de acesso restrito.
-              Monitoramento contínuo para evitar acessos não autorizados.
-              5. Direitos do Usuário
-              Você tem o direito de:
-
-              Acessar, corrigir ou excluir seus dados pessoais.
-              Retirar consentimento para comunicações de marketing a qualquer momento.
-              Solicitar informações sobre como usamos seus dados.
-              6. Cookies
-              Utilizamos cookies para otimizar a navegação no site e oferecer experiências personalizadas. Você pode gerenciar as preferências de cookies no seu navegador.
-
-              7. Alterações na Política de Privacidade
-              Reservamo-nos o direito de atualizar esta política periodicamente. Notificaremos mudanças importantes por e-mail ou no site.</p>
+          <div className="TextSobre">
+            <p>Nós, da TecHouse, respeitamos sua privacidade e estamos comprometidos em proteger os dados pessoais que você nos confia. Esta política explica como coletamos, usamos e protegemos suas informações.</p>
           </div>
-
         )}
-
-        <h4 className='Sobre' onClick={Whatsapp}>WHATSAPP</h4>
-        <h4 onClick={OpenAdm} className='Sobre'>ADM</h4>
+        <h4 className="Sobre" onClick={Whatsapp}>WHATSAPP</h4>
+        <h4 onClick={OpenAdm} className="Sobre">ADM</h4>
         {adm && (
-
           <div>
-            <div className='password'>
-            <button onClick={CloseAdm} className='ClosePass'>x</button>
+            <div className="password">
+              <button onClick={CloseAdm} className="ClosePass">x</button>
               <h2>Login</h2>
               <input
-
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
-
-                type='password'></input>
+                type="password"
+              />
               <button onClick={SenhaMen}>Entrar</button>
-              {divSenha &&(
+              {divSenha && (
                 <div>
-
-                   <h3 style={{color: 'white', fontFamily: 'monospace'}}><i style={{fontSize: '15px', color: corOlho}} class="bi bi-eye-fill"></i> Pessoas online: {onlineUsers}</h3>
-
+                  <h3 style={{ color: 'white', fontFamily: 'monospace' }}>
+                    <i style={{ fontSize: '15px', color: corOlho }} className="bi bi-eye-fill"></i> Pessoas online: {onlineUsers}
+                  </h3>
                 </div>
               )}
-            
-
             </div>
-          
           </div>
-
         )}
-        <img src='/pagamentos-2.png'></img>
+        <img src="/pagamentos-2.png" alt="Pagamentos" />
       </div>
     </div>
-  )
+  );
 }
