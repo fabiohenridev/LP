@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set, onValue, remove, update } from 'firebase/database';
+import { getDatabase, ref, set, get, onDisconnect, onValue } from 'firebase/database';
 import { getAnalytics } from 'firebase/analytics';
 import './Footer.css';
 
@@ -14,26 +14,20 @@ const registerUser = (userId, database) => {
     lastSeen: Date.now()  // Marca o horário da última interação
   });
 
-  // Ação para marcar como offline quando o usuário sair
-  const handleBeforeUnload = () => {
-    update(userRef, {
-      isOnline: false,
-      lastSeen: Date.now()  // Atualiza a hora do último visto ao desconectar
-    });
-  };
-
-  window.addEventListener('beforeunload', handleBeforeUnload);
-
-  // Limpeza ao desmontar o componente (remover o evento)
-  return () => {
-    window.removeEventListener('beforeunload', handleBeforeUnload);
-  };
+  // Garantir que o status "offline" seja atribuído quando a conexão for perdida
+  onDisconnect(userRef).set({
+    isOnline: false,
+    lastSeen: Date.now(),  // Atualiza a hora do último visto ao desconectar
+  });
 };
 
 // Função para remover um usuário online
 const removeUser = (userId, database) => {
   const userRef = ref(database, 'onlineUsers/' + userId);
-  remove(userRef);  // Remove o usuário da lista quando ele desconectar
+  set(userRef, {
+    isOnline: false,
+    lastSeen: Date.now()  // Garante que o usuário seja marcado como offline ao ser removido
+  });
 };
 
 // Função para verificar e contar o número de usuários online (baseado no timestamp)
@@ -42,11 +36,11 @@ const getOnlineUsers = (setOnlineUsers, database) => {
   onValue(usersRef, (snapshot) => {
     const users = snapshot.val();
     if (users) {
-      // Filtra e conta apenas os usuários online que tem `lastSeen` atualizado nos últimos 5 minutos
+      // Filtra e conta apenas os usuários online que têm `lastSeen` recente (menos de 30 segundos atrás)
       const onlineUsers = Object.keys(users).filter(userId => {
         const user = users[userId];
-        // Considera apenas usuários com status online e com o `lastSeen` recente (menos de 5 minutos atrás)
-        return user.isOnline && (Date.now() - user.lastSeen < 5 * 60 * 1000);  // Considera online se a última atividade foi nos últimos 5 minutos
+        // Considera apenas usuários com status online e com o `lastSeen` atualizado nos últimos 30 segundos
+        return user.isOnline && (Date.now() - user.lastSeen < 30 * 1000);  // Considera online se a última atividade foi nos últimos 30 segundos
       }).length;
 
       setOnlineUsers(onlineUsers);  // Atualiza o estado com a quantidade de online
@@ -86,14 +80,13 @@ export default function Footer() {
     const userId = Date.now(); // Gerando um ID único com o timestamp
 
     // Registrar o usuário no Firebase
-    const cleanup = registerUser(userId, database);
+    registerUser(userId, database);
 
     // Obter o número de usuários online
     getOnlineUsers(setOnlineUsers, database);
 
     // Limpar ao sair (quando o usuário fecha a aba ou sai da página)
     return () => {
-      cleanup();  // Limpeza do evento 'beforeunload' quando o componente for desmontado
       removeUser(userId, database);
     };
   }, []);
@@ -157,7 +150,43 @@ export default function Footer() {
         <h4 onClick={AbrirPrivacidade} className="Sobre">POLÍTICAS DE PRIVACIDADE</h4>
         {privacidade && (
           <div className="TextSobre">
-            <p>Nós, da TecHouse, respeitamos sua privacidade e estamos comprometidos em proteger os dados pessoais que você nos confia. Esta política explica como coletamos, usamos e protegemos suas informações.</p>
+            <p>Nós, da TecHouse, respeitamos sua privacidade e estamos comprometidos em proteger os dados pessoais que você nos confia. Esta política explica como coletamos, usamos e protegemos suas informações.
+
+1. Coleta de Dados
+Coletamos as informações necessárias para fornecer nossos serviços, como:
+
+Dados pessoais: Nome, e-mail, endereço de entrega, telefone.
+Dados de pagamento: Informações do cartão ou detalhes bancários para transações seguras.
+Informações de navegação: Cookies e dados de acesso para melhorar sua experiência no site.
+2. Uso das Informações
+Utilizamos os dados para:
+
+Processar compras e garantir entregas.
+Enviar atualizações sobre pedidos, promoções ou novidades, com seu consentimento.
+Melhorar nossos serviços e personalizar sua experiência.
+Cumprir obrigações legais e regulatórias.
+3. Compartilhamento de Dados
+Não vendemos nem compartilhamos suas informações pessoais com terceiros, exceto:
+
+Provedores de pagamento e entrega, para completar transações.
+Autoridades legais, em caso de cumprimento de ordens judiciais.
+4. Segurança dos Dados
+Adotamos medidas técnicas e organizacionais para proteger suas informações, incluindo:
+
+Criptografia de dados.
+Controle de acesso restrito.
+Monitoramento contínuo para evitar acessos não autorizados.
+5. Direitos do Usuário
+Você tem o direito de:
+
+Acessar, corrigir ou excluir seus dados pessoais.
+Retirar consentimento para comunicações de marketing a qualquer momento.
+Solicitar informações sobre como usamos seus dados.
+6. Cookies
+Utilizamos cookies para otimizar a navegação no site e oferecer experiências personalizadas. Você pode gerenciar as preferências de cookies no seu navegador.
+
+7. Alterações na Política de Privacidade
+Reservamo-nos o direito de atualizar esta política periodicamente. Notificaremos mudanças importantes por e-mail ou no site.</p>
           </div>
         )}
         <h4 className="Sobre" onClick={Whatsapp}>WHATSAPP</h4>

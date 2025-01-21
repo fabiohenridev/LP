@@ -40,10 +40,20 @@ export const removeUser = (userId) => {
   });
 };
 
-// Função para obter o número de usuários online
-export const getOnlineUsers = async () => {
-  const dbRef = ref(database, 'onlineUsers');
-  const snapshot = await get(dbRef);
-  const users = snapshot.val();
-  return users ? Object.keys(users).length : 0; // Contagem de usuários online
+const getOnlineUsers = (setOnlineUsers, database) => {
+  const usersRef = ref(database, 'onlineUsers');
+  onValue(usersRef, (snapshot) => {
+    const users = snapshot.val();
+    if (users) {
+      const onlineUsers = Object.keys(users).filter(userId => {
+        const user = users[userId];
+        // Considera usuário online apenas se ele foi ativo nos últimos 5 minutos
+        return user.isOnline && (Date.now() - user.lastSeen < 5 * 60 * 1000);
+      }).length;
+
+      setOnlineUsers(onlineUsers);  // Atualiza o estado com o número de online
+    } else {
+      setOnlineUsers(0);  // Caso não haja usuários online
+    }
+  });
 };
