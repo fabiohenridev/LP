@@ -114,7 +114,7 @@ return () => clearTimeout(Timer);
                                 <img className='Img' src='./man.png'></img>
                             </div>
                             <div className='ConteudoDuvida'>
-                                <p>Olá, me chamo <span className='FabioL'>Fabio lima</span>... que bom ter você por aqui decidindo saber mais sobre o marketing digital ! </p>
+                                <p>Olá, me chamo <span className='FabioL'>Fábio lima</span> ! Que bom tê-lo por aqui e ver que decidiu aprender mais sobre o marketing digital.</p>
                             </div>
 
                         </div>
