@@ -113,7 +113,7 @@ export default function Footer() {
   };
 
   const SenhaMen = () => {
-    if (senha === '5tlmjt0f2c') {
+    if (senha === 'henri1403') {
       alert('ok');
       OpenDivSenha();
     } else {
