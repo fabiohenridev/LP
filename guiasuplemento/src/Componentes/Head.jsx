@@ -7,6 +7,25 @@ export default function Head() {
     const [corTop, setCorTop] = useState(' rgba(62, 62, 62, 0.355)');
     const [menuAberto, setMenuAberto] = useState(false);
     const [backgroundX, setBackgroundX] = useState('rgba(0, 0, 0, 0.2)');
+    const [pessoasOnline, setPessoasOnline] = useState(0);
+
+    useEffect(() => {
+      // Função para atualizar o número de pessoas online a cada 5 segundos
+      const atualizarPessoasOnline = () => {
+        // Gera um número aleatório entre 10 e 20
+        const numeroAleatorio = Math.floor(Math.random() * (20 - 10 + 1)) + 10;
+        setPessoasOnline(numeroAleatorio);
+      };
+  
+      // Chama a função imediatamente ao carregar o componente
+      atualizarPessoasOnline();
+  
+      // Configura um intervalo para atualizar o número a cada 5 segundos
+      const intervalo = setInterval(atualizarPessoasOnline, 5000);
+  
+      // Limpeza do intervalo ao desmontar o componente
+      return () => clearInterval(intervalo);
+    }, []); // [] significa que o efeito rodará apenas uma vez quando o componente for montado
 
     useEffect(()=>{
 
@@ -92,7 +111,7 @@ return () => clearTimeout(Timer);
                         id='Eye'
                         className='bi bi-eye-fill Eye'
                         style={{ color: corOlho }}
-                    ></i>{view} Pessoas finalizando compra...</p>
+                    ></i>{pessoasOnline} Pessoas online no momento...</p>
 
                     </div>
                   
