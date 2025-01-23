@@ -17,7 +17,7 @@ const handleDownload = () => {
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const a = document.createElement('a');
       a.href = url;
-      a.download = 'meuarquivo.pdf'; // Nome do arquivo a ser salvo
+      a.download = 'ganharOnline.pdf'; // Nome do arquivo a ser salvo
       document.body.appendChild(a);
       a.click();
     })
