@@ -1,36 +1,13 @@
-import { useState, useEffect } from 'react';
-import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, set, get, onDisconnect, onValue } from 'firebase/database';
-import { getAnalytics } from 'firebase/analytics';
-import './Footer.css';
+import { useState, useEffect } from 'react'; 
+import { initializeApp } from 'firebase/app'; 
+import { getDatabase, ref, set, get, onDisconnect, onValue } from 'firebase/database'; 
+import { getAnalytics } from 'firebase/analytics'; 
+import './Footer.css'; 
 import axios from 'axios';
 
-const handleDownload = () => {
-  // Realizando a requisição para o backend que fornecerá o arquivo para download
-  axios({
-    url: 'https://backend-psi-eight-64.vercel.app/', // URL do seu backend
-    method: 'GET',
-    responseType: 'blob',  // Necessário para o download de arquivos binários
-  })
-    .then((response) => {
-      // Criando um link para fazer o download do arquivo
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'ganharOnline.pdf'; // Nome do arquivo a ser salvo
-      document.body.appendChild(a);
-      a.click();
-    })
-    .catch((error) => {
-      console.error("Erro ao baixar o arquivo", error);
-    });
-};
-
-// Função para registrar um usuário online
+// Função para registrar o usuário online
 const registerUser = (userId, database) => {
   const userRef = ref(database, 'onlineUsers/' + userId);
-
-  // Registrar o usuário como online com o timestamp (para poder determinar a última vez que ele foi ativo)
   set(userRef, {
     isOnline: true,
     lastSeen: Date.now()  // Marca o horário da última interação
@@ -39,16 +16,16 @@ const registerUser = (userId, database) => {
   // Garantir que o status "offline" seja atribuído quando a conexão for perdida
   onDisconnect(userRef).set({
     isOnline: false,
-    lastSeen: Date.now(),  // Atualiza a hora do último visto ao desconectar
+    lastSeen: Date.now(),
   });
 };
 
-// Função para remover um usuário online
+// Função para remover o usuário online
 const removeUser = (userId, database) => {
   const userRef = ref(database, 'onlineUsers/' + userId);
   set(userRef, {
     isOnline: false,
-    lastSeen: Date.now()  // Garante que o usuário seja marcado como offline ao ser removido
+    lastSeen: Date.now(),
   });
 };
 
@@ -58,10 +35,8 @@ const getOnlineUsers = (setOnlineUsers, database) => {
   onValue(usersRef, (snapshot) => {
     const users = snapshot.val();
     if (users) {
-      // Filtra e conta apenas os usuários online que têm `lastSeen` recente (menos de 5 minutos atrás)
       const onlineUsers = Object.keys(users).filter(userId => {
         const user = users[userId];
-        // Considera apenas usuários com status online e com o `lastSeen` atualizado nos últimos 5 minutos
         return user.isOnline && (Date.now() - user.lastSeen < 5 * 60 * 1000);  // Considera online se a última atividade foi nos últimos 5 minutos
       }).length;
 
@@ -70,6 +45,29 @@ const getOnlineUsers = (setOnlineUsers, database) => {
       setOnlineUsers(0);  // Caso não haja nenhum usuário online
     }
   });
+};
+
+const handleDownload = async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/download', {
+      responseType: 'blob',  // Indicamos que esperamos um arquivo binário
+    });
+
+    // Criando um link temporário para o arquivo
+    const url = window.URL.createObjectURL(new Blob([response.data]));
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'meuarquivo.pdf');  // Nome do arquivo no download
+
+    // Simula o clique no link para iniciar o download
+    document.body.appendChild(link);
+    link.click();
+
+    // Limpeza do link temporário
+    document.body.removeChild(link);
+  } catch (error) {
+    console.error("Erro ao baixar o arquivo:", error);
+  }
 };
 
 export default function Footer() {
@@ -83,7 +81,6 @@ export default function Footer() {
   const [corOlho, setCorOlho] = useState('rgb(0, 255, 60)');
 
   useEffect(() => {
-    // Configuração do Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCIRvIecgxWjdpQ-So34HMQd43p9hodLzQ",
       authDomain: "henriquelima-e3e88.firebaseapp.com",
@@ -98,16 +95,11 @@ export default function Footer() {
     const database = getDatabase(app);
     const analytics = getAnalytics(app);
 
-    // Gerar um ID único para cada usuário (usando o timestamp)
-    const userId = Date.now(); // Gerando um ID único com o timestamp
+    const userId = Date.now();  // Gerando um ID único com o timestamp
 
-    // Registrar o usuário no Firebase
     registerUser(userId, database);
-
-    // Obter o número de usuários online
     getOnlineUsers(setOnlineUsers, database);
 
-    // Limpar ao sair (quando o usuário fecha a aba ou sai da página)
     return () => {
       removeUser(userId, database);
     };
@@ -117,7 +109,6 @@ export default function Footer() {
     const interval = setInterval(() => {
       setCorOlho((prevCor) => (prevCor === 'rgb(0, 255, 60)' ? 'white' : 'rgb(0, 255, 60)'));
     }, 500);
-
     return () => clearInterval(interval);
   }, []);
 
@@ -136,10 +127,10 @@ export default function Footer() {
 
   const SenhaMen = () => {
     if (senha === 'dhs6hsj') {
-      alert('ok');
-      OpenDivSenha();
+      alert('Login bem-sucedido!');
+      OpenDivSenha();  // Libera o acesso ao conteúdo após a senha correta
     } else {
-      alert('somente pessoas cadastradas');
+      alert('Senha incorreta');
     }
   };
 
@@ -172,43 +163,7 @@ export default function Footer() {
         <h4 onClick={AbrirPrivacidade} className="Sobre">POLÍTICAS DE PRIVACIDADE</h4>
         {privacidade && (
           <div className="TextSobre">
-            <p>Nós, da TecHouse, respeitamos sua privacidade e estamos comprometidos em proteger os dados pessoais que você nos confia. Esta política explica como coletamos, usamos e protegemos suas informações.
-
-1. Coleta de Dados
-Coletamos as informações necessárias para fornecer nossos serviços, como:
-
-Dados pessoais: Nome, e-mail, endereço de entrega, telefone.
-Dados de pagamento: Informações do cartão ou detalhes bancários para transações seguras.
-Informações de navegação: Cookies e dados de acesso para melhorar sua experiência no site.
-2. Uso das Informações
-Utilizamos os dados para:
-
-Processar compras e garantir entregas.
-Enviar atualizações sobre pedidos, promoções ou novidades, com seu consentimento.
-Melhorar nossos serviços e personalizar sua experiência.
-Cumprir obrigações legais e regulatórias.
-3. Compartilhamento de Dados
-Não vendemos nem compartilhamos suas informações pessoais com terceiros, exceto:
-
-Provedores de pagamento e entrega, para completar transações.
-Autoridades legais, em caso de cumprimento de ordens judiciais.
-4. Segurança dos Dados
-Adotamos medidas técnicas e organizacionais para proteger suas informações, incluindo:
-
-Criptografia de dados.
-Controle de acesso restrito.
-Monitoramento contínuo para evitar acessos não autorizados.
-5. Direitos do Usuário
-Você tem o direito de:
-
-Acessar, corrigir ou excluir seus dados pessoais.
-Retirar consentimento para comunicações de marketing a qualquer momento.
-Solicitar informações sobre como usamos seus dados.
-6. Cookies
-Utilizamos cookies para otimizar a navegação no site e oferecer experiências personalizadas. Você pode gerenciar as preferências de cookies no seu navegador.
-
-7. Alterações na Política de Privacidade
-Reservamo-nos o direito de atualizar esta política periodicamente. Notificaremos mudanças importantes por e-mail ou no site.</p>
+            <p>Política de privacidade...</p>
           </div>
         )}
         <h4 className="Sobre" onClick={Whatsapp}>WHATSAPP</h4>
@@ -226,22 +181,19 @@ Reservamo-nos o direito de atualizar esta política periodicamente. Notificaremo
               <button onClick={SenhaMen}>Entrar</button>
               {divSenha && (
                 <div>
-               
                   <div className='baixar'>
-                  <h3 style={{ color: 'white', fontFamily: 'monospace', fontSize: '12px' }}>
-                    <i style={{ fontSize: '10px', color: corOlho }} className="bi bi-eye-fill"></i> Pessoas online: {onlineUsers}
-                  </h3>
-                  <button className='e-book' onClick={handleDownload}>Baixar e-book</button>
+                    <h3 style={{ color: 'white', fontFamily: 'monospace', fontSize: '12px' }}>
+                      <i style={{ fontSize: '10px', color: corOlho }} className="bi bi-eye-fill"></i> Pessoas online: {onlineUsers}
+                    </h3>
+                    <button className='e-book' onClick={handleDownload}>Baixar e-book</button>
                   </div>
                 </div>
               )}
             </div>
-           
           </div>
         )}
         <img src="/pagamentos-2.png" alt="Pagamentos" />
       </div>
-   
     </div>
   );
 }
