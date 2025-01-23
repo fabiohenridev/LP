@@ -49,7 +49,7 @@ const getOnlineUsers = (setOnlineUsers, database) => {
 
 const handleDownload = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/download', {
+    const response = await axios.get('https://backend-psi-eight-64.vercel.app/', {
       responseType: 'blob',  // Indicamos que esperamos um arquivo binário
     });
 
