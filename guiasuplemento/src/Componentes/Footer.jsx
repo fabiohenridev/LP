@@ -3,6 +3,28 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, set, get, onDisconnect, onValue } from 'firebase/database';
 import { getAnalytics } from 'firebase/analytics';
 import './Footer.css';
+import axios from 'axios';
+
+const handleDownload = () => {
+  // Realizando a requisição para o backend que fornecerá o arquivo para download
+  axios({
+    url: 'https://backend-psi-eight-64.vercel.app/', // URL do seu backend
+    method: 'GET',
+    responseType: 'blob',  // Necessário para o download de arquivos binários
+  })
+    .then((response) => {
+      // Criando um link para fazer o download do arquivo
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'meuarquivo.pdf'; // Nome do arquivo a ser salvo
+      document.body.appendChild(a);
+      a.click();
+    })
+    .catch((error) => {
+      console.error("Erro ao baixar o arquivo", error);
+    });
+};
 
 // Função para registrar um usuário online
 const registerUser = (userId, database) => {
@@ -113,7 +135,7 @@ export default function Footer() {
   };
 
   const SenhaMen = () => {
-    if (senha === 'henri1403') {
+    if (senha === 'dhs6hsj') {
       alert('ok');
       OpenDivSenha();
     } else {
@@ -204,16 +226,22 @@ Reservamo-nos o direito de atualizar esta política periodicamente. Notificaremo
               <button onClick={SenhaMen}>Entrar</button>
               {divSenha && (
                 <div>
-                  <h3 style={{ color: 'white', fontFamily: 'monospace' }}>
-                    <i style={{ fontSize: '15px', color: corOlho }} className="bi bi-eye-fill"></i> Pessoas online: {onlineUsers}
+               
+                  <div className='baixar'>
+                  <h3 style={{ color: 'white', fontFamily: 'monospace', fontSize: '12px' }}>
+                    <i style={{ fontSize: '10px', color: corOlho }} className="bi bi-eye-fill"></i> Pessoas online: {onlineUsers}
                   </h3>
+                  <button className='e-book' onClick={handleDownload}>Baixar e-book</button>
+                  </div>
                 </div>
               )}
             </div>
+           
           </div>
         )}
         <img src="/pagamentos-2.png" alt="Pagamentos" />
       </div>
+   
     </div>
   );
 }
